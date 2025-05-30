@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Analyzer</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="resume">Upload Resume (PDF):</label>
+            <input type="file" name="resume" required>
+            <label for="job_description">Job Description:</label>
+            <textarea name="job_description" rows="5" required></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+        {% if extracted_data %}
+            <div class="results">
+                <h2>Extracted Skills:</h2>
+                <ul>
+                    {% for skill in extracted_data.skills %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+                <h2>Match Score: {{ extracted_data.match_score }}%</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
